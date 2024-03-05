@@ -17,46 +17,44 @@ class Limit():
             raise Exception("Port already in use.")
 
 
-    @staticmethod
-    def press() -> None:
+    def press(self) -> None:
         """
         Presses the limit.
 
         :return: None
         """
-        Limit.pressing = True
+
+        self.pressing = True
     
 
-    @staticmethod
-    def release() -> None:
+    def release(self) -> None:
         """
         Releases the limit.
 
         :return: None
         """
-        Limit.pressing = False
+
+        self.pressing = False
 
 
-    @staticmethod
-    def value() -> int:
+    def value(self) -> int:
         """
         Gets the value of the limit.
 
         :return: The value of the limit.
         """
 
-        if Limit.pressing:
+        if self.pressing:
             return 1
         
         return 0
 
 
-    @staticmethod
-    def pressing() -> bool:
+    def pressing(self) -> bool:
         """
         Gets whether the limit is pressing.
 
         :return: Whether the limit is pressing.
         """
         
-        return Limit.pressing
+        return self.pressing

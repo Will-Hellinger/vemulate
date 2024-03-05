@@ -17,48 +17,44 @@ class Led:
             raise Exception("Port already in use.")
 
 
-    @staticmethod
-    def on() -> None:
+    def on(self) -> None:
         """
         Turns the LED on.
 
         :return: None
         """
 
-        Led.state = True
+        self.state = True
     
 
-    @staticmethod
-    def off() -> None:
+    def off(self) -> None:
         """
         Turns the LED off.
 
         :return: None
         """
 
-        Led.state = False
+        self.state = False
     
 
-    @staticmethod
-    def value() -> int:
+    def value(self) -> int:
         """
         Gets the value of the LED.
 
         :return: The value of the LED.
         """
 
-        if Led.state:
+        if self.state:
             return 1
         
         return 0
     
 
-    @staticmethod
-    def set(is_set: bool) -> None:
+    def set(self, is_set: bool) -> None:
         """
         Sets the value of the LED.
 
         :return: None
         """
 
-        Led.state = is_set
+        self.state = is_set

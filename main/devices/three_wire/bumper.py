@@ -17,46 +17,42 @@ class Bumper:
             raise Exception("Port already in use.")
 
 
-    @staticmethod
-    def press() -> None:
+    def press(self) -> None:
         """
         Presses the Bumper.
 
         :return: None
         """
-        Bumper.pressing = True
+        self.pressing = True
     
 
-    @staticmethod
-    def release() -> None:
+    def release(self) -> None:
         """
         Releases the Bumper.
 
         :return: None
         """
-        Bumper.pressing = False
+        self.pressing = False
 
 
-    @staticmethod
-    def value() -> int:
+    def value(self) -> int:
         """
         Gets the value of the Bumper.
 
         :return: The value of the Bumper.
         """
 
-        if Bumper.pressing:
+        if self.pressing:
             return 1
         
         return 0
 
 
-    @staticmethod
-    def pressing() -> bool:
+    def pressing(self) -> bool:
         """
         Gets whether the Bumper is pressing.
 
         :return: Whether the Bumper is pressing.
         """
         
-        return Bumper.pressing
+        return self.pressing
