@@ -1,8 +1,4 @@
 class Led:
-    state: bool = False
-    port: str = ""
-
-
     def __init__(self, brain, port: str):
         """
         Initializes a new LED instance.
@@ -11,7 +7,10 @@ class Led:
         :param port: The port to use.
         """
 
-        if brain.request_port(port):
+        self.state: bool = False
+        self.port_type: str = "three_wire"
+
+        if brain.request_port(port, self.port_type):
             self.port = port
         else:
             raise Exception("Port already in use.")

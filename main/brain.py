@@ -46,7 +46,7 @@ class Color:
     ORANGE: str = "ORANGE"
     PURPLE: str = "PURPLE"
     CYAN: str = "CYAN"
-    TRANSPARENT: str = "TRANSPAREN"
+    TRANSPARENT: str = "TRANSPARENT"
 
 
 class FontType:
@@ -83,7 +83,7 @@ class Brain:
         pygame.display.set_caption("Brain")
 
 
-    def request_port(self, port: str) -> bool:
+    def request_port(self, port: str, port_type: str) -> bool:
         """
         Requests the port to use.
 
@@ -92,6 +92,12 @@ class Brain:
         """
 
         while_loop()
+
+        if port_type == "full" and not port.isnumeric():
+            raise Exception("Invalid port type.")
+
+        if port_type == "three_wire" and port.isnumeric():
+            raise Exception("Invalid port type.")
 
         if self.ports.get(port) == False:
             self.ports[port] = True

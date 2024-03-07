@@ -1,8 +1,4 @@
 class Bumper:
-    pressing: bool = False
-    port: str = ""
-
-
     def __init__(self, brain, port: str):
         """
         Initializes a new Bumper instance.
@@ -10,8 +6,10 @@ class Bumper:
         :param brain: The brain to use.
         :param port: The port to use.
         """
+        self.pressing_: bool = False
+        self.port_type: str = "three_wire"
         
-        if brain.request_port(port):
+        if brain.request_port(port, self.port_type):
             self.port = port
         else:
             raise Exception("Port already in use.")
@@ -23,7 +21,7 @@ class Bumper:
 
         :return: None
         """
-        self.pressing = True
+        self.pressing_ = True
     
 
     def release(self) -> None:
@@ -32,7 +30,7 @@ class Bumper:
 
         :return: None
         """
-        self.pressing = False
+        self.pressing_ = False
 
 
     def value(self) -> int:
@@ -42,7 +40,7 @@ class Bumper:
         :return: The value of the Bumper.
         """
 
-        if self.pressing:
+        if self.pressing_:
             return 1
         
         return 0
@@ -55,4 +53,4 @@ class Bumper:
         :return: Whether the Bumper is pressing.
         """
         
-        return self.pressing
+        return self.pressing_

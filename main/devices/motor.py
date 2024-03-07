@@ -6,19 +6,13 @@ REVERSE: str = "reverse"
 VOLT: str = 'volt'
 DEGREES: str = 'degrees'
 
+class GearSetting:
+    RATIO_18_1: str = "18:1"
+    RATIO_36_1: str = "36:1"
+    RATIO_6_1: str = "6:1"
+
 
 class Motor:
-    spinning: bool = False
-    direction: str = "forward"
-    port: str = ""
-    rpm: int = 0
-    reverse: bool = False
-    motor_rotation: int = 0
-    voltage: float = 0.0
-
-    start_spinning: float = 0.0
-
-
     def __init__(self, brain, port: str, gear_setting: str = "18:1", reverse: bool = False) -> None:
         """
         Initializes a new LED instance.
@@ -26,12 +20,6 @@ class Motor:
         :param brain: The brain to use.
         :param port: The port to use.
         """
-
-        if brain.request_port(port):
-            self.port = port
-        else:
-            raise Exception("Port already in use.")
-
         self.reverse = reverse
 
         match gear_setting:
@@ -44,7 +32,17 @@ class Motor:
             case _:
                 raise Exception("Invalid gear setting.")
         
-        print(self.rpm)
+        self.spinning: bool = False
+        self.direction: str = "forward"
+        self.motor_rotation: int = 0
+        self.voltage: float = 0.0
+        self.start_spinning: float = 0.0
+        self.port_type: str = "full"
+
+        if brain.request_port(port, self.port_type):
+            self.port = port
+        else:
+            raise Exception("Port already in use.")
 
 
     def set_reversed(self, is_reversed: bool) -> None:

@@ -1,8 +1,4 @@
 class Limit():
-    pressing: bool = False
-    port: str = ""
-
-
     def __init__(self, brain, port: str):
         """
         Initializes a new limit instance.
@@ -11,7 +7,10 @@ class Limit():
         :param port: The port to use.
         """
         
-        if brain.request_port(port):
+        self.pressing_: bool = False
+        self.port_type: str = "three_wire"
+
+        if brain.request_port(port, self.port_type):
             self.port = port
         else:
             raise Exception("Port already in use.")
@@ -24,7 +23,7 @@ class Limit():
         :return: None
         """
 
-        self.pressing = True
+        self.pressing_ = True
     
 
     def release(self) -> None:
@@ -34,7 +33,7 @@ class Limit():
         :return: None
         """
 
-        self.pressing = False
+        self.pressing_ = False
 
 
     def value(self) -> int:
@@ -44,7 +43,7 @@ class Limit():
         :return: The value of the limit.
         """
 
-        if self.pressing:
+        if self.pressing_:
             return 1
         
         return 0
@@ -57,4 +56,4 @@ class Limit():
         :return: Whether the limit is pressing.
         """
         
-        return self.pressing
+        return self.pressing_
